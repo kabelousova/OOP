@@ -18,8 +18,9 @@ void ConfigParser::read_file() {
         throw WrongConfigFileException();
     }
 
+    getline(config_file, line);
+
     while (line.rfind("csed") != 0 && !config_file.eof()) {
-        getline(config_file, line);
         char *end;
         unsigned long index = strtoul(line.data(), &end, 10);
         end += 3;
@@ -48,9 +49,11 @@ void ConfigParser::read_file() {
 
             block_config[index] = {block_name, block_params};
         }
+
+        getline(config_file, line);
     }
 
-    if (config_file.eof()) {
+    if (config_file.eof() || line.rfind("csed") != 0) {
         throw WrongConfigFileException();
     }
 
