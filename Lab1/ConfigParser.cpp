@@ -15,7 +15,7 @@ void ConfigParser::read_file() {
     getline(config_file, line);
 
     if (line.rfind("desc") != 0) {
-        throw WrongConfigFileException();
+        throw WrongConfigFileException("Cannot find \"desc\"");
     }
 
     getline(config_file, line);
@@ -54,7 +54,7 @@ void ConfigParser::read_file() {
     }
 
     if (config_file.eof() || line.rfind("csed") != 0) {
-        throw WrongConfigFileException();
+        throw WrongConfigFileException("Cannot find \"csed\"");
     }
 
 

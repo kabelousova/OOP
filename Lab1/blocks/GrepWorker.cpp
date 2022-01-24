@@ -16,7 +16,7 @@ std::list<std::string> GrepWorker::execute(std::list<std::string> &text) {
 
 GrepWorker::GrepWorker(const std::list<std::string> &params) {
     if (params.empty())
-        throw WrongNumberOfArgsException();
+        throw WrongNumberOfArgsException("Should 1 argument");
 
     this->word = *params.begin();
 }

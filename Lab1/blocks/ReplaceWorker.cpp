@@ -16,7 +16,7 @@ std::list<std::string> ReplaceWorker::execute(std::list<std::string> &text) {
 
 ReplaceWorker::ReplaceWorker(const std::list<std::string> &params) {
     if (params.size() < 2)
-        throw WrongNumberOfArgsException();
+        throw WrongNumberOfArgsException("Should 2 arguments");
 
     this->word_to_replace = *params.begin();
     this->word_for_replace = *std::next(params.begin());

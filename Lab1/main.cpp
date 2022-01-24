@@ -7,6 +7,7 @@
 #include "factory/ReaderCreator.h"
 #include "factory/WriterCreator.h"
 #include "factory/ReplaceCreator.h"
+#include "execeptions/WrongNumberOfArgsException.h"
 
 
 int main(int argc, char **argv) {
@@ -35,14 +36,19 @@ int main(int argc, char **argv) {
         // По номеру блока получаем информацию о нем
         const auto &block_info = config.get_block_info(block_number);
 
-        // Получаем нужного Creator'а по имени блока и создаем блок
-        auto block = factory_map[block_info.first]->create(block_info.second);
+        try {
+            // Получаем нужного Creator'а по имени блока и создаем блок
+            auto block = factory_map[block_info.first]->create(block_info.second);
+            // Преобразовываем текст
+            text = block->execute(text);
 
-        // Преобразовываем текст
-        text = block->execute(text);
-
-        // Удаляем блок
-        delete block;
+            // Удаляем блок
+            delete block;
+        }
+        catch (WrongNumberOfArgsException &e) {
+            std::cout << e.what() << std::endl;
+            break;
+        }
     }
 
     // В конце удаляем всех Creator'ов

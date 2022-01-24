@@ -16,7 +16,7 @@ std::list<std::string> WriterWorker::execute(std::list<std::string> &text) {
 
 WriterWorker::WriterWorker(const std::list<std::string> &params) {
     if (params.empty())
-        throw WrongNumberOfArgsException();
+        throw WrongNumberOfArgsException("Should 1 argument");
 
     this->file_name = *params.begin();
 }

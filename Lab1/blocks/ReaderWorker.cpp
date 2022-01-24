@@ -22,7 +22,7 @@ std::list<std::string> ReaderWorker::execute(std::list<std::string> &text) {
 
 ReaderWorker::ReaderWorker(const std::list<std::string> &params) {
     if (params.empty())
-        throw WrongNumberOfArgsException();
+        throw WrongNumberOfArgsException("Should 1 argument");
 
     this->file_name = *params.begin();
 }
