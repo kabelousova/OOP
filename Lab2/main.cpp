@@ -38,12 +38,10 @@ int main(int argc, char **argv) {
 
         try {
             // Получаем нужного Creator'а по имени блока и создаем блок
-            auto block = factory_map[block_info.first]->create(block_info.second);
-            // Преобразовываем текст
-            text = block->execute(text);
+            auto &block = factory_map[block_info.first]->getWorker();
 
-            // Удаляем блок
-            delete block;
+            // Преобразовываем текст
+            text = block.execute(text, block_info.second);
         }
         catch (WrongNumberOfArgsException &e) {
             std::cout << e.what() << std::endl;

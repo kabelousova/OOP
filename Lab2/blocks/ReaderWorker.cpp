@@ -3,8 +3,13 @@
 #include "../execeptions/WrongNumberOfArgsException.h"
 
 
-std::list<std::string> ReaderWorker::execute(std::list<std::string> &text) {
+std::list<std::string> ReaderWorker::execute(std::list<std::string> &text, const std::list<std::string> &params) {
     std::list<std::string> read_lines;
+
+    if (params.empty())
+        throw WrongNumberOfArgsException("Cannot to execute ReaderWorker. Should 1 argument, get 0.");
+
+    std::string file_name = *params.begin();
     std::ifstream in(file_name);//открываем файл для чтения
 
     if (in.is_open()) {
@@ -18,11 +23,4 @@ std::list<std::string> ReaderWorker::execute(std::list<std::string> &text) {
 
     in.close();
     return read_lines;
-}
-
-ReaderWorker::ReaderWorker(const std::list<std::string> &params) {
-    if (params.empty())
-        throw WrongNumberOfArgsException("Should 1 argument");
-
-    this->file_name = *params.begin();
 }

@@ -6,8 +6,8 @@
 
 class Creator {
 public:
-    virtual Worker *create(const std::list<std::string> &params) = 0;
+    virtual Worker &getWorker() = 0;
 };
 
 
-#endif //LAB1_CREATOR_H
+#endif
